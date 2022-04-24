@@ -22,18 +22,17 @@ namespace WebAPI.Controllers
         [HttpGet(Name = "GetUser")]
         public ActionResult<IEnumerable<result2>> Get(string username)
         {
-            var finalResult = _service.GetUserData(username).ToArray();
-            if (finalResult.Length == 1)
+            result2[]? finalResult;
+            try
             {
-                var tmp = finalResult[0];
-                if (tmp.userName == "-1")
-                {
-                    return StatusCode(int.Parse(tmp.userLogin));
-                }
+                finalResult = _service.GetUserData(username).ToArray();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(int.Parse(ex.Message));
             }
 
             return finalResult;
-
         }
     }
 }

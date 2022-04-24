@@ -22,14 +22,14 @@ namespace WebAPI.Controllers
         [HttpGet(Name = "GetRepositories")]
         public ActionResult<IEnumerable<result1>> Get(string username)
         {
-            var finalResult = _service.GetRepositories(username).ToArray();
-            if (finalResult.Length == 1)
+            result1[]? finalResult;
+            try
             {
-                var tmp = finalResult[0];
-                if (tmp.repositorylanguagesAndBytes == "-1")
-                {
-                    return StatusCode(int.Parse(tmp.repositoryName));
-                }
+                finalResult = _service.GetRepositories(username).ToArray();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(int.Parse(ex.Message));
             }
 
             return finalResult;

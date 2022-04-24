@@ -77,26 +77,26 @@ namespace WebAPI
             return res;
         }
 
-        public string ContentToString(HttpContent httpContent)
+        private string ContentToString(HttpContent httpContent)
         {
             var readAsStringAsync = httpContent.ReadAsStringAsync();
             return readAsStringAsync.Result;
         }
 
-        public void MyErrorHandler1(List<result1> repositories, HttpResponseMessage mess)
+        private void MyErrorHandler1(List<result1> repositories, HttpResponseMessage mess)
         {
             var a = mess.StatusCode;
             int b = (int)a;
             repositories.Clear();
-            repositories.Add(new result1 { repositoryName = b.ToString(), repositorylanguagesAndBytes = "-1" });
+            throw (new Exception(b.ToString()));
         }
 
-        public void MyErrorHandler2(List<result2> informations, HttpResponseMessage mess)
+        private void MyErrorHandler2(List<result2> informations, HttpResponseMessage mess)
         {
             var a = mess.StatusCode;
             int b = (int)a;
             informations.Clear();
-            informations.Add(new result2 { userLogin = b.ToString(), userName = "-1" ,userBio ="",languagesAndBytes=""});
+            throw (new Exception(b.ToString()));
         }
 
         public IEnumerable<result1> GetRepositories(string username) 
@@ -132,10 +132,16 @@ namespace WebAPI
                     }
                     var content2 = mess2.Content;
                     string? answer2 = ContentToString(content2);
+                    var tmp = answer2.Split('"');
+                    string fAnswer=string.Empty;
+                    for (int i = 0; i < tmp.Length; i++)
+                    {
+                        fAnswer = fAnswer + tmp[i];
+                    }
                     var R = new result1
                     {
                         repositoryName = repo.name,
-                        repositorylanguagesAndBytes = answer2
+                        repositorylanguagesAndBytes = fAnswer
                     };
 
                     repositories.Add(R);
