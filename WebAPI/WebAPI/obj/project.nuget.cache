@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "dgSpecHash": "SmfA+ebtAwesYQ3x8OIFFeyJeqXPWsypK7nohBH2r83kQbGy1wbM2zZzSr9sqUMaYrU/hajqW29q0Wrj9P30ew==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Komputer\\Desktop\\Allegro\\webAPI\\WebAPI\\WebAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Komputer\\.nuget\\packages\\htmlagilitypack\\1.11.42\\htmlagilitypack.1.11.42.nupkg.sha512",
+    "C:\\Users\\Komputer\\.nuget\\packages\\htmlagilitypack.cssselectors\\1.0.2\\htmlagilitypack.cssselectors.1.0.2.nupkg.sha512",
+    "C:\\Users\\Komputer\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Komputer\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Komputer\\.nuget\\packages\\swashbuckle.aspnetcore\\6.3.1\\swashbuckle.aspnetcore.6.3.1.nupkg.sha512",
+    "C:\\Users\\Komputer\\.nuget\\packages\\swashbuckle.aspnetcore.annotations\\6.3.1\\swashbuckle.aspnetcore.annotations.6.3.1.nupkg.sha512",
+    "C:\\Users\\Komputer\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.3.1\\swashbuckle.aspnetcore.swagger.6.3.1.nupkg.sha512",
+    "C:\\Users\\Komputer\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.3.1\\swashbuckle.aspnetcore.swaggergen.6.3.1.nupkg.sha512",
+    "C:\\Users\\Komputer\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.3.1\\swashbuckle.aspnetcore.swaggerui.6.3.1.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Pakiet „HtmlAgilityPack.CssSelectors 1.0.2” został przywrócony przy użyciu elementu „.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8” zamiast platformy docelowej projektu „net6.0”. Ten pakiet może nie być w pełni kompatybilny z Twoim projektem.",
+      "libraryId": "HtmlAgilityPack.CssSelectors",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
+}
