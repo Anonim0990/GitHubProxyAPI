@@ -10,20 +10,29 @@ namespace WebAPI.Controllers
     public class ControlllerUser : ControllerBase
     {
         private readonly ILogger<ControlllerUser> _logger;
+        private readonly IGithubRequestsService _service;
 
-        public ControlllerUser(ILogger<ControlllerUser> logger)
+        public ControlllerUser(ILogger<ControlllerUser> logger, IGithubRequestsService service)
         {
             _logger = logger;
+            _service = service;
         }
-
 
         [SwaggerOperation(Summary = "Get User Informations")]
         [HttpGet(Name = "GetUser")]
-        public IEnumerable<result2> Get(string username)
+        public ActionResult<IEnumerable<result2>> Get(string username)
         {
+            var finalResult = _service.GetUserData(username).ToArray();
+            if (finalResult.Length == 1)
+            {
+                var tmp = finalResult[0];
+                if (tmp.userName == "-1")
+                {
+                    return StatusCode(int.Parse(tmp.userLogin));
+                }
+            }
 
-            var R = new GitHubRequests(username);
-            return R.GetUserData().ToArray();
+            return finalResult;
 
         }
     }

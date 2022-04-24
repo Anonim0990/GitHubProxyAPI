@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
@@ -11,19 +10,29 @@ namespace WebAPI.Controllers
     public class ControlllerRepositories : ControllerBase
     {
         private readonly ILogger<ControlllerRepositories> _logger;
+        private readonly IGithubRequestsService _service;
 
-        public ControlllerRepositories(ILogger<ControlllerRepositories> logger)
+        public ControlllerRepositories(ILogger<ControlllerRepositories> logger,IGithubRequestsService service)
         {
             _logger = logger;
+            _service = service;
         }
 
         [SwaggerOperation(Summary = "Get User Repositories")]
         [HttpGet(Name = "GetRepositories")]
-        public IEnumerable<result1> Get(string username)
+        public ActionResult<IEnumerable<result1>> Get(string username)
         {
+            var finalResult = _service.GetRepositories(username).ToArray();
+            if (finalResult.Length == 1)
+            {
+                var tmp = finalResult[0];
+                if (tmp.repositorylanguagesAndBytes == "-1")
+                {
+                    return StatusCode(int.Parse(tmp.repositoryName));
+                }
+            }
 
-            var R = new GithubRequestsService(username);
-            return R.GetRepositories().ToArray();
+            return finalResult;
 
         }
     }

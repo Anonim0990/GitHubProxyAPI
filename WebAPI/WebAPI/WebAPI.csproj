@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
     <PackageReference Include="HtmlAgilityPack.CssSelectors" Version="1.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.WebApiCompatShim" Version="2.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.3.1" />
   </ItemGroup>
