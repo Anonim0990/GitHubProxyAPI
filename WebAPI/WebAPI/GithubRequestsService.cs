@@ -87,7 +87,6 @@ namespace WebAPI
         {
             var a = mess.StatusCode;
             int b = (int)a;
-            Console.WriteLine(b.ToString());
             repositories.Clear();
             repositories.Add(new result1 { repositoryName = b.ToString(), repositorylanguagesAndBytes = "-1" });
         }
@@ -96,7 +95,6 @@ namespace WebAPI
         {
             var a = mess.StatusCode;
             int b = (int)a;
-            Console.WriteLine(b.ToString());
             informations.Clear();
             informations.Add(new result2 { userLogin = b.ToString(), userName = "-1" ,userBio ="",languagesAndBytes=""});
         }
@@ -171,15 +169,15 @@ namespace WebAPI
 
             var task2 = GetString(gitHubUrl);
 
-            HttpResponseMessage mess2 = task1.Result;
+            HttpResponseMessage mess2 = task2.Result;
             if (mess2.IsSuccessStatusCode == false)
             {
                 MyErrorHandler2(informations, mess2);
                 return informations;
             }
 
-            var content2 = mess1.Content;
-            string? answer2 = ContentToString(content1);
+            var content2 = mess2.Content;
+            string? answer2 = ContentToString(content2);
 
             var repos = JsonSerializer.Deserialize<List<repository>>(answer2);
 
@@ -200,7 +198,7 @@ namespace WebAPI
             {
                 string tmpUrl = "https://api.github.com/repos/" + username + "/" + proj + "/languages";
 
-                var task3 = GetString(gitHubUrl);
+                var task3 = GetString(tmpUrl);
 
                 HttpResponseMessage mess3 = task3.Result;
                 if (mess3.IsSuccessStatusCode == false)
@@ -209,8 +207,8 @@ namespace WebAPI
                     return informations;
                 }
 
-                var content3 = mess1.Content;
-                string? answer3 = ContentToString(content1);
+                var content3 = mess3.Content;
+                string? answer3 = ContentToString(content3);
 
                 string answerTMP1=answer3.Remove(0, 1);
                 string answerTMP2 = answerTMP1.Remove(answerTMP1.Length-1, 1);
@@ -249,7 +247,7 @@ namespace WebAPI
                 }
             }
 
-            string finalAnswer=String.Empty;    
+            string finalAnswer=string.Empty;    
             for(int i =0;i<languagesTMP.Count;i++)
             {
                 finalAnswer = finalAnswer+languagesTMP[i]+" : "+ bytes[i] +" ; ";
