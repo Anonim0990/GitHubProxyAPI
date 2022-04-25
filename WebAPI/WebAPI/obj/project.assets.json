@@ -6119,11 +6119,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Komputer\\Desktop\\Allegro\\webAPI\\WebAPI\\WebAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Komputer\\Desktop\\Allegro\\WebAPI\\WebAPI\\WebAPI.csproj",
       "projectName": "WebAPI",
-      "projectPath": "C:\\Users\\Komputer\\Desktop\\Allegro\\webAPI\\WebAPI\\WebAPI.csproj",
+      "projectPath": "C:\\Users\\Komputer\\Desktop\\Allegro\\WebAPI\\WebAPI\\WebAPI.csproj",
       "packagesPath": "C:\\Users\\Komputer\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Komputer\\Desktop\\Allegro\\webAPI\\WebAPI\\obj\\",
+      "outputPath": "C:\\Users\\Komputer\\Desktop\\Allegro\\WebAPI\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

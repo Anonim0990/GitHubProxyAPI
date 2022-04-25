@@ -26,19 +26,6 @@ namespace WebAPI
         [JsonPropertyName("bio")]
         public string? _bio { get; set; }
     }
-    public class RepositoryData
-    {
-        public string? repositoryName { get; set; }
-        public string? repositorylanguagesAndBytes { get; set; }
-    }
-
-    public class UserData
-    {
-        public string? userLogin { get; set; }
-        public string? userName { get; set; }
-        public string? userBio { get; set; }
-        public string? languagesAndBytes { get; set; }
-    }
 
     public class GithubRequestsService : IRequestsService
     {

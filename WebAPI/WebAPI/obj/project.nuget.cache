@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BhVdtuO9vhYkn5Dq/rqI5CU+Qoj3ipcUuyzZqHQUm/QEkk5rOhVdhz03lW4dSlQ7xOK6sBlDSs4u+d9I8XVy6g==",
+  "dgSpecHash": "1Cv8iYY8WmK9+SbroohZ4ywcu4+GoRBlpiw2aII0Yc8QAPxXS9R1XEfnlbStGM+ab8UG75h/HeshFoTtBKJSrw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Komputer\\Desktop\\Allegro\\webAPI\\WebAPI\\WebAPI.csproj",
+  "projectFilePath": "C:\\Users\\Komputer\\Desktop\\Allegro\\WebAPI\\WebAPI\\WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Komputer\\.nuget\\packages\\htmlagilitypack\\1.11.42\\htmlagilitypack.1.11.42.nupkg.sha512",
     "C:\\Users\\Komputer\\.nuget\\packages\\htmlagilitypack.cssselectors\\1.0.2\\htmlagilitypack.cssselectors.1.0.2.nupkg.sha512",
