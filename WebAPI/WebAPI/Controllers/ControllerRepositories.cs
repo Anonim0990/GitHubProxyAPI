@@ -10,9 +10,9 @@ namespace WebAPI.Controllers
     public class ControlllerRepositories : ControllerBase
     {
         private readonly ILogger<ControlllerRepositories> _logger;
-        private readonly IGithubRequestsService _service;
+        private readonly IRequestsService _service;
 
-        public ControlllerRepositories(ILogger<ControlllerRepositories> logger,IGithubRequestsService service)
+        public ControlllerRepositories(ILogger<ControlllerRepositories> logger, IRequestsService service)
         {
             _logger = logger;
             _service = service;
@@ -20,9 +20,9 @@ namespace WebAPI.Controllers
 
         [SwaggerOperation(Summary = "Get User Repositories")]
         [HttpGet(Name = "GetRepositories")]
-        public ActionResult<IEnumerable<result1>> Get(string username)
+        public ActionResult<IEnumerable<RepositoryData>> Get(string username)
         {
-            result1[]? finalResult;
+            RepositoryData[]? finalResult;
             try
             {
                 finalResult = _service.GetRepositories(username).ToArray();

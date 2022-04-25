@@ -11,11 +11,11 @@ using System.Text;
 namespace WebAPI
 {
 
-    public class repository 
+    public class Repository
     {
         public string name { get; set; }
     }
-    public class user
+    public class User
     {
         [JsonPropertyName("login")]
         public string? _login { get; set; }
@@ -26,13 +26,13 @@ namespace WebAPI
         [JsonPropertyName("bio")]
         public string? _bio { get; set; }
     }
-    public class result1
+    public class RepositoryData
     {
         public string? repositoryName { get; set; }
         public string? repositorylanguagesAndBytes { get; set; }
     }
 
-    public class result2
+    public class UserData
     {
         public string? userLogin { get; set; }
         public string? userName { get; set; }
@@ -40,32 +40,15 @@ namespace WebAPI
         public string? languagesAndBytes { get; set; }
     }
 
-    public class GithubRequestsService : IGithubRequestsService
+    public class GithubRequestsService : IRequestsService
     {
         private const string baseGitHubUrl = "https://api.github.com/users/";
-        private string gitHubUrl=string.Empty;
+        private string gitHubUrl = string.Empty;
 
         private static readonly HttpClient client = new HttpClient();
 
-        private async Task<Stream> GetTaskStream(string url )
-        {
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
-            client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");
 
-            var res = await client.GetStreamAsync(url);
-            return res;    
-        }
 
-        private async Task<string> GetTaskString(string url)
-        {
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
-            client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");
-
-            var res = await client.GetStringAsync(url);
-            return res;
-        }
 
         private async Task<HttpResponseMessage> GetString(string url)
         {
@@ -83,7 +66,7 @@ namespace WebAPI
             return readAsStringAsync.Result;
         }
 
-        private void MyErrorHandler1(List<result1> repositories, HttpResponseMessage mess)
+        private void MyErrorHandler1(List<RepositoryData> repositories, HttpResponseMessage mess)
         {
             var a = mess.StatusCode;
             int b = (int)a;
@@ -91,7 +74,7 @@ namespace WebAPI
             throw (new Exception(b.ToString()));
         }
 
-        private void MyErrorHandler2(List<result2> informations, HttpResponseMessage mess)
+        private void MyErrorHandler2(List<UserData> informations, HttpResponseMessage mess)
         {
             var a = mess.StatusCode;
             int b = (int)a;
@@ -99,10 +82,10 @@ namespace WebAPI
             throw (new Exception(b.ToString()));
         }
 
-        public IEnumerable<result1> GetRepositories(string username) 
+        public IEnumerable<RepositoryData> GetRepositories(string username)
         {
 
-            List<result1> repositories = new List<result1>();
+            List<RepositoryData> repositories = new List<RepositoryData>();
             gitHubUrl = baseGitHubUrl + username + "/repos";
             var task1 = GetString(gitHubUrl);
 
@@ -116,13 +99,13 @@ namespace WebAPI
             var content1 = mess1.Content;
             string? answer1 = ContentToString(content1);
 
-            var repos = JsonSerializer.Deserialize<List<repository>>(answer1);
+            var repos = JsonSerializer.Deserialize<List<Repository>>(answer1);
 
-            if(repos != null)
+            if (repos != null)
             {
                 foreach (var repo in repos)
                 {
-                    string tmpUrl = "https://api.github.com/repos/"+username+"/"+repo.name+"/languages";
+                    string tmpUrl = "https://api.github.com/repos/" + username + "/" + repo.name + "/languages";
                     var task2 = GetString(tmpUrl);
                     HttpResponseMessage mess2 = task2.Result;
                     if (mess2.IsSuccessStatusCode == false)
@@ -133,12 +116,12 @@ namespace WebAPI
                     var content2 = mess2.Content;
                     string? answer2 = ContentToString(content2);
                     var tmp = answer2.Split('"');
-                    string fAnswer=string.Empty;
+                    string fAnswer = string.Empty;
                     for (int i = 0; i < tmp.Length; i++)
                     {
                         fAnswer = fAnswer + tmp[i];
                     }
-                    var R = new result1
+                    var R = new RepositoryData
                     {
                         repositoryName = repo.name,
                         repositorylanguagesAndBytes = fAnswer
@@ -152,9 +135,9 @@ namespace WebAPI
         }
 
 
-        public IEnumerable<result2> GetUserData(string username)
+        public IEnumerable<UserData> GetUserData(string username)
         {
-            List<result2> informations = new List<result2>();
+            List<UserData> informations = new List<UserData>();
             gitHubUrl = baseGitHubUrl + username;
 
             var task1 = GetString(gitHubUrl);
@@ -168,9 +151,9 @@ namespace WebAPI
 
             var content1 = mess1.Content;
             string? answer1 = ContentToString(content1);
-            var userData = JsonSerializer.Deserialize<user>(answer1);
+            var userData = JsonSerializer.Deserialize<User>(answer1);
 
-            gitHubUrl = baseGitHubUrl + username+"/repos";
+            gitHubUrl = baseGitHubUrl + username + "/repos";
 
 
             var task2 = GetString(gitHubUrl);
@@ -185,7 +168,7 @@ namespace WebAPI
             var content2 = mess2.Content;
             string? answer2 = ContentToString(content2);
 
-            var repos = JsonSerializer.Deserialize<List<repository>>(answer2);
+            var repos = JsonSerializer.Deserialize<List<Repository>>(answer2);
 
             List<string> projects = new List<string>();
 
@@ -197,7 +180,7 @@ namespace WebAPI
                 }
             }
 
-            List<string> languagesTMP= new List<string>();
+            List<string> languagesTMP = new List<string>();
             List<int> bytes = new List<int>();
 
             foreach (var proj in projects)
@@ -216,11 +199,11 @@ namespace WebAPI
                 var content3 = mess3.Content;
                 string? answer3 = ContentToString(content3);
 
-                string answerTMP1=answer3.Remove(0, 1);
-                string answerTMP2 = answerTMP1.Remove(answerTMP1.Length-1, 1);
-                  
+                string answerTMP1 = answer3.Remove(0, 1);
+                string answerTMP2 = answerTMP1.Remove(answerTMP1.Length - 1, 1);
+
                 var tmpHelp = answerTMP2.Split('"');
-                
+
                 List<string> tmp = new List<string>();
                 foreach (var item in tmpHelp)
                 {
@@ -228,9 +211,9 @@ namespace WebAPI
                     {
                         tmp.Add(item);
 
-                    }        
+                    }
                 }
-                for(int i =0; i<tmp.Count(); i=i+2)
+                for (int i = 0; i < tmp.Count(); i = i + 2)
                 {
                     if (languagesTMP.Contains(tmp[i]) == false)
                     {
@@ -238,30 +221,30 @@ namespace WebAPI
                         bytes.Add(0);
                     }
                 }
-                for (int i = 0; i+1 < tmp.Count(); i = i + 2)
+                for (int i = 0; i + 1 < tmp.Count(); i = i + 2)
                 {
-                    for(int j = 0; j < languagesTMP.Count; j++)
+                    for (int j = 0; j < languagesTMP.Count; j++)
                     {
-                        if(languagesTMP[j] == tmp[i])
+                        if (languagesTMP[j] == tmp[i])
                         {
                             var num = tmp[i + 1];
                             if (num[num.Length - 1] == ',') num = num.Remove(num.Length - 1, 1);
-                            bytes[j] = bytes[j]+ int.Parse(num.Remove(0, 1)); 
+                            bytes[j] = bytes[j] + int.Parse(num.Remove(0, 1));
                             break;
                         }
                     }
                 }
             }
 
-            string finalAnswer=string.Empty;    
-            for(int i =0;i<languagesTMP.Count;i++)
+            string finalAnswer = string.Empty;
+            for (int i = 0; i < languagesTMP.Count; i++)
             {
-                finalAnswer = finalAnswer+languagesTMP[i]+" : "+ bytes[i] +" ; ";
+                finalAnswer = finalAnswer + languagesTMP[i] + " : " + bytes[i] + " ; ";
             }
 
             if (userData != null)
             {
-                var R = new result2
+                var R = new UserData
                 {
                     userLogin = userData._login,
                     userName = userData._name,

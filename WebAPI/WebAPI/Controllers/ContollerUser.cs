@@ -10,9 +10,9 @@ namespace WebAPI.Controllers
     public class ControlllerUser : ControllerBase
     {
         private readonly ILogger<ControlllerUser> _logger;
-        private readonly IGithubRequestsService _service;
+        private readonly IRequestsService _service;
 
-        public ControlllerUser(ILogger<ControlllerUser> logger, IGithubRequestsService service)
+        public ControlllerUser(ILogger<ControlllerUser> logger, IRequestsService service)
         {
             _logger = logger;
             _service = service;
@@ -20,9 +20,9 @@ namespace WebAPI.Controllers
 
         [SwaggerOperation(Summary = "Get User Informations")]
         [HttpGet(Name = "GetUser")]
-        public ActionResult<IEnumerable<result2>> Get(string username)
+        public ActionResult<IEnumerable<UserData>> Get(string username)
         {
-            result2[]? finalResult;
+            UserData[]? finalResult;
             try
             {
                 finalResult = _service.GetUserData(username).ToArray();

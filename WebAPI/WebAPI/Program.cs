@@ -11,7 +11,7 @@ builder.Services.AddSwaggerGen(c =>
     c.EnableAnnotations();
 
 });
-builder.Services.AddTransient<IGithubRequestsService, GithubRequestsService>();
+builder.Services.AddTransient<IRequestsService, GithubRequestsService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
