@@ -11,4 +11,5 @@ Odpowiada on za zwrócenie listy repozytoriów (nazw) wraz z informacjami o uży
 Odpowiada on za zwrócenie danych użytkownika wraz z zagregowaną informacją o językach programowania użytych w jego repozytoriach.
 
 # Instrukcja uruchomienia
-Należy pobrać pilk WebAPI.zip, a następnie go rozpakować i uruchumoić za pomocą narzędzia Visual Studio.
+Należy pobrać pilk WebAPI.zip, a następnie go rozpakować i uruchumoić za pomocą narzędzia Visual Studio. Uruchomienie projektu spowoduje uruchomienie się okna z 
+dokumentacją metod udostępnianych przez api wykonaną przez swaggera, przy pomocy którego można wywołać i przetestować każdą z metod.
