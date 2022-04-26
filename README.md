@@ -12,4 +12,4 @@ Odpowiada on za zwrócenie danych użytkownika wraz z zagregowaną informacją o
 
 # Instrukcja uruchomienia
 Należy pobrać pilk WebAPI.zip, a następnie go rozpakować i uruchumoić za pomocą narzędzia Visual Studio. Uruchomienie projektu spowoduje uruchomienie się okna z 
-dokumentacją metod udostępnianych przez api wykonaną przez swaggera, przy pomocy którego można wywołać i przetestować każdą z metod.
+dokumentacją metod udostępnianych przez API wykonaną przez swaggera, przy pomocy którego można wywołać i przetestować każdą z metod.
