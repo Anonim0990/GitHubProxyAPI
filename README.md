@@ -1,5 +1,4 @@
-# allegro-summer-experience-2022
-My email in recruitment process: mateusz0990@gmail.com
+# Github Proxy
 Stworzone przeze mnie API to serwer pośredniczący(proxy). Służy on do pobierania danych z GitHuba poprzez zapytania do odpowiednich REST Endpoints udostępnianych przez Api GitHuba ( https://docs.github.com/en/rest/overview/endpoints-available-for-github-apps ). W swoim projekcie wykorzystuję bibliotekę Swagger która umożliwia dokumentowanie oraz korzystanie z dostępnego w aplikacji API.
 
 # Controllers
