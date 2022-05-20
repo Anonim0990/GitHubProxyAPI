@@ -6,7 +6,7 @@ Stworzone przeze mnie API to serwer pośredniczący(proxy). Służy on do pobier
 ## ControllerRepositories   
 Odpowiada on za zwrócenie listy repozytoriów (nazw) wraz z informacjami o użytych w nich językach programowania.
 
-## ControllerUSer  
+## ControllerUser  
 Odpowiada on za zwrócenie danych użytkownika wraz z zagregowaną informacją o językach programowania użytych w jego repozytoriach.
 
 # Instrukcja uruchomienia
